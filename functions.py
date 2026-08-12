@@ -558,7 +558,7 @@ def fetch_data(host, port=80, args="", headers = "", filetype="text"):
     try:
         #with pool.socket(pool.AF_INET, pool.SOCK_STREAM) as s:
         with pool.socket() as raw:
-            cache = bytearray(512)
+            cache = bytearray(1024)
             raw.settimeout(varinit.socket_timeout)
         
             context = ssl.create_default_context()
