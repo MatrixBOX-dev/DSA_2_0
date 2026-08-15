@@ -733,7 +733,24 @@ def get_departure(num = "1", dataout = [["1", "^ Data error","","",""]]):
         new_cancel_scroll_text = ""
     
         if api_provider == 3:
-            deps = data.get("departureList", [])
+            departure_list = data.get("departureList", {})
+        
+            if isinstance(departure_list, dict):
+                deps = departure_list.get("departure", [])
+        
+                # Genau eine Abfahrt:
+                # VVO liefert "departure" dann als dict statt als Liste.
+                if isinstance(deps, dict):
+                    deps = [deps]
+        
+                elif not isinstance(deps, list):
+                    deps = []
+        
+            elif isinstance(departure_list, list):
+                deps = departure_list
+        
+            else:
+                deps = []
         elif api_provider in (1, 2):
             if isinstance(data, list):
                 deps = data
