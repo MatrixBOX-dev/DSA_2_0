@@ -695,11 +695,11 @@ def get_departure(num = "1", dataout = [["1", "^ Data error","","",""]]):
         temperature_check()
         host, port, args = get_api_request(num)
         
-        _data = fetch_data(
-            host=host,
-            port=port,
-            args=args
-        )
+        url = "https://"+host+args
+        from __main__ import requests
+        _data = requests.get(url)
+        _data = _data.text
+          
         if _data:
             print("RAW LEN:", len(_data))
             print("RAW START:", _data[:200])
