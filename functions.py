@@ -988,7 +988,7 @@ def reformat_data(trainlist):
             pass
 
         if not varinit.settings["clocktime"] and not row[3].endswith(varinit.settings["mins"]):
-            row[3] += varinit.settings["mins"]
+            if varinit.if_long > 128: row[3] += varinit.settings["mins"]
 
         if varinit.if_long == 128:
             if row[2] in station_names_dict:
