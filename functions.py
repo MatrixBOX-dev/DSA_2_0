@@ -698,6 +698,7 @@ def get_departure(num = "1", dataout = [["1", "^ Data error","","",""]]):
         url = "https://"+host+args
         from __main__ import requests
         _data = requests.get(url)
+        varinit.currenttime = convert_date(_data.headers["date"])
         _data = _data.text
           
         if _data:
